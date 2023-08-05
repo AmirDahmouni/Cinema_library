@@ -5,14 +5,14 @@ import {
   Box
 } from '@chakra-ui/react';
 import axios from 'axios';
-import ExpandableText from '../components/ExpandableText';
-import GameAttributes from '../components/GameAttributes';
-import GameScreenshots from '../components/GameScreenshots';
-import GameTrailer from '../components/GameTrailer';
+import ExpandableText from '@/components/ExpandableText';
+import GameAttributes from '@/components/GameAttributes';
+import GameScreenshots from '@/components/GameScreenshots';
+import GameTrailer from '@/components/GameTrailer';
 import IGame from '@/entities/Game';
 import { log } from 'console';
 
-const GameDetailPage = ({ game, error }: any) => {
+export default function GameDetailPage({ game, error }: any) {
 
   if (error)
     return (
@@ -60,22 +60,12 @@ const GameDetailPage = ({ game, error }: any) => {
 
 
 export async function getStaticPaths() {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_URL_API}/games/`,
-    {
-      params: {
-        key: process.env.NEXT_PUBLIC_KEY_API
-      }
-    }
+  const { data } = await axios.get<IGame>(
+    `${process.env.NEXT_PUBLIC_URL_API}/games?key=${process.env.NEXT_PUBLIC_KEY_API}`,
   )
-  console.log('====================================');
-  console.log(data);
-  console.log('====================================');
-  let paths = data.results.games.map((game: IGame) => ({ params: { name: game.slug } }))
 
-  console.log('====================================');
-  console.log(paths);
-  console.log('====================================');
+  let paths: string[] = []
+  data.results.map((game: IGame) => paths.push({ params: { slug: game.slug } }))
   return {
     paths,
     fallback: true
@@ -85,12 +75,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: any) {
 
   const { data } = await axios.get<IGame>(
-    `${process.env.NEXT_PUBLIC_URL_API}/games/${params.slug}`,
-    {
-      params: {
-        key: process.env.NEXT_KEY_API
-      }
-    }
+    `${process.env.NEXT_PUBLIC_URL_API}/games/${params.slug}?key=${process.env.NEXT_PUBLIC_KEY_API}`,
   )
   return {
     props: {
