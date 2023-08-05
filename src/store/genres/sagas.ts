@@ -5,14 +5,18 @@ import { fetchGenresFailure, fetchGenresSuccess } from "./actions";
 import { FETCH_GENRES_REQUEST } from "./actionTypes";
 import IGenre from "../../entities/Genre";
 
-const getGenres = () => axios.get<IGenre[]>(`${process.env.NEXT_PUBLIC_URL_API}/genres?key=${process.env.NEXT_PUBLIC_KEY_API}`);
+const getGenres = () => axios.get<IGenre[]>(`${process.env.NEXT_PUBLIC_URL_API}/genre/tv/list`, {
+  headers: {
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_API}`
+  }
+});
 
 
 function* fetchGenresSaga() {
   try {
 
-    const response: AxiosResponse<IGenre> = yield call(getGenres);
-    yield put(fetchGenresSuccess({ genres: response.data.results }));
+    const response: AxiosResponse<any> = yield call(getGenres);
+    yield put(fetchGenresSuccess(response.data.genres));
   } catch (e) {
     const error = e as AxiosError;
     yield put(fetchGenresFailure({ error: error.message }));

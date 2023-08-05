@@ -1,8 +1,8 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { useDispatch, connect } from "react-redux";
 import { BsChevronDown } from 'react-icons/bs'
-import { fetchGamesRequest, updateGamesFilters } from '../store/games/actions';
-import { useEffect, useState } from 'react';
+import { fetchMoviesRequest, updateMoviesFilters } from '../store/movies/actions';
+import { useState } from 'react';
 
 const SortSelector = ({ filters }: any) => {
 
@@ -11,25 +11,24 @@ const SortSelector = ({ filters }: any) => {
 
   const sortOrders = [
     { value: "", label: "Relevance" },
-    { value: "-added", label: "Date added" },
-    { value: "name", label: "Name" },
-    { value: "-released", label: "Release date" },
-    { value: "-metacritic", label: "popularity" },
-    { value: "-rating", label: "Average rating" }
+    { value: "popularity.desc", label: "popularity" },
+    { value: "primary_release_date.desc", label: "Release date" },
+    { value: "revenue.desc", label: "revenue" },
+    { value: "vote_average.desc", label: "Average rating" }
   ]
 
 
   const onSelectOrder = (filterValue: string) => {
     setSortOrder(filterValue)
-    dispatch(updateGamesFilters("sortOrder", filterValue))
-    dispatch(fetchGamesRequest(filters))
+    dispatch(updateMoviesFilters("sortOrder", filterValue))
+    dispatch(fetchMoviesRequest(filters))
   }
 
   const currentSortOrder = sortOrders.find(order => order.value === sortOrder)
 
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />}>{currentSortOrder?.label || 'Relevance'}</MenuButton>
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>{currentSortOrder?.label || 'Sort by'}</MenuButton>
       <MenuList>
         {
           sortOrders.map((order) =>
@@ -42,9 +41,9 @@ const SortSelector = ({ filters }: any) => {
   )
 }
 
-const mapStateToProps = ({ gamesState }: any) => {
+const mapStateToProps = ({ moviesState }: any) => {
   return {
-    filters: gamesState.filters
+    filters: moviesState.filters
   };
 };
 

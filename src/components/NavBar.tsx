@@ -2,7 +2,7 @@ import { Button, HStack, Image } from "@chakra-ui/react"
 import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
-import { fetchGamesRequest, updateGamesFilters } from "../store/games/actions";
+import { fetchMoviesRequest, updateMoviesFilters } from "../store/movies/actions";
 import { useDispatch } from "react-redux";
 import { connect } from 'react-redux';
 import { useRouter } from "next/router";
@@ -14,8 +14,8 @@ const NavBar = ({ filters }: any) => {
   const router = useRouter()
 
   const search = (text: string) => {
-    dispatch(updateGamesFilters("searchText", text))
-    dispatch(fetchGamesRequest(filters))
+    dispatch(updateMoviesFilters("searchText", text))
+    dispatch(fetchMoviesRequest(filters))
   }
 
   const disconnect = useCallback(() => {
@@ -44,7 +44,7 @@ const NavBar = ({ filters }: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    filters: state.gamesState.filters
+    filters: state.moviesState.filters
   };
 };
 

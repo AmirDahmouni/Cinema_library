@@ -1,20 +1,19 @@
 import {
-  FETCH_GAMES_REQUEST,
-  FETCH_GAMES_SUCCESS,
-  FETCH_GAMES_FAILURE,
-  UPDATE_GAMES_FILTERS,
-  FETCH_GAME_REQUEST,
-  FETCH_GAME_SUCCESS,
-  FETCH_GAME_FAILURE,
-  FETCH_SCREEN_GAME_SUCESS,
+  FETCH_MOVIES_REQUEST,
+  FETCH_MOVIES_SUCCESS,
+  FETCH_MOVIES_FAILURE,
+  UPDATE_MOVIES_FILTERS,
+  FETCH_MOVIE_REQUEST,
+  FETCH_MOVIE_SUCCESS,
+  FETCH_MOVIE_FAILURE,
 } from "./actionTypes";
 
 
-import { GamesActions, GamesState } from "./types";
+import { MoviesActions, MoviesState } from "./types";
 
-const initialState: GamesState = {
+const initialState: MoviesState = {
   pending: false,
-  games: [],
+  movies: [],
   filters: [
     { key: "genreId", value: null },
     { key: "platfotmId", value: null },
@@ -23,56 +22,55 @@ const initialState: GamesState = {
     { key: "pageParam", value: null },
     { key: "pageParam", value: 1 },
   ],
-  selectedGame: null,
-  screens: null,
+  selectedMovie: null,
   error: null,
   nbPages: null
 };
 
-export default (state = initialState, action: GamesActions) => {
+export default function reducer(state = initialState, action: MoviesActions) {
   switch (action.type) {
-    case FETCH_GAMES_REQUEST:
+    case FETCH_MOVIES_REQUEST:
       return {
         ...state,
         pending: true,
         filters: action.payload
       };
-    case FETCH_GAME_REQUEST:
+    case FETCH_MOVIE_REQUEST:
       return {
         ...state,
         pending: true,
         slug: action.payload.slug,
       };
-    case FETCH_GAMES_SUCCESS:
+    case FETCH_MOVIES_SUCCESS:
       return {
         ...state,
         pending: false,
-        games: action.payload.games,
+        movies: action.payload.movies,
         nbPages: action.payload.nbPages,
         error: null,
       };
-    case FETCH_GAME_SUCCESS:
+    case FETCH_MOVIE_SUCCESS:
       return {
         ...state,
         pending: false,
-        selectedGame: action.payload.game,
+        selectedMovie: action.payload.movie,
         error: null,
       };
-    case FETCH_GAME_FAILURE:
+    case FETCH_MOVIE_FAILURE:
       return {
         ...state,
         pending: false,
-        selectedGame: null,
+        selectedMovie: null,
         error: action.payload.error,
       };
-    case FETCH_GAMES_FAILURE:
+    case FETCH_MOVIES_FAILURE:
       return {
         ...state,
         pending: false,
-        games: [],
+        movies: [],
         error: action.payload.error,
       };
-    case UPDATE_GAMES_FILTERS:
+    case UPDATE_MOVIES_FILTERS:
       {
         let updatedFilters = state.filters
         const indexFilter = updatedFilters?.findIndex(filter => filter.key === action.filter)
@@ -88,11 +86,6 @@ export default (state = initialState, action: GamesActions) => {
           filters: updatedFilters,
         };
       };
-    case FETCH_SCREEN_GAME_SUCESS:
-      return {
-        ...state,
-        screens: action.payload.screens
-      }
     default:
       return state
   }

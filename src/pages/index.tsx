@@ -1,15 +1,14 @@
 import Head from 'next/head'
-import NavBar from '../components/NavBar'
 import { Grid, GridItem, HStack, Show, Box, IconButton, Button } from '@chakra-ui/react'
-import GameGrid from "../components/GameGrid"
-import GenreList from "../components/GenreList"
-import PlatformSelector from '../components/PlatformSelector'
-import GameHeading from '../components/GameHeading'
-import SortSelector from '../components/SortSelector'
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons"
 import { useCallback, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
-import { updateGamesFilters, fetchGamesRequest } from '../store/games/actions';
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons"
+import NavBar from '../components/NavBar'
+import MovieGrid from "../components/MovieGrid"
+import MovieHeading from '../components/MovieHeading'
+import GenreSelector from '@/components/genreSelector'
+import SortSelector from '../components/SortSelector'
+import { updateMoviesFilters, fetchMoviesRequest } from '../store/movies/actions';
 
 function Home({ filters, nbPages }: any) {
 
@@ -18,8 +17,8 @@ function Home({ filters, nbPages }: any) {
   const dispatch = useDispatch()
 
   const handlePageChange = useCallback((page: number) => {
-    dispatch(updateGamesFilters("pageParam", page))
-    dispatch(fetchGamesRequest(filters))
+    dispatch(updateMoviesFilters("pageParam", page))
+    dispatch(fetchMoviesRequest(filters))
     setCurrentPage(page)
     let pages = [1, 2, 3]
     if (page == nbPages)
@@ -40,30 +39,21 @@ function Home({ filters, nbPages }: any) {
       <NavBar />
 
       <Grid templateAreas={{
-        base: `"nav" "main"`,
+        base: `"nav" "main" "pagination"`,
         lg: `"nav nav" "aside main"`
       }}
-        templateColumns={{
-          base: '2fr',
-          lg: '250px 2fr'
-        }}
-      >
 
-        <Show above="lg">
-          <GridItem area="aside" paddingX="20px" >
-            <GenreList />
-          </GridItem>
-        </Show>
+      >
         <GridItem area="main" >
           <Box paddingLeft={2}>
-            <GameHeading />
+            <MovieHeading />
             <HStack spacing={5} paddingLeft={2} >
-              <PlatformSelector />
+              <GenreSelector />
               <SortSelector />
             </HStack>
           </Box>
-          <GameGrid />
-          <Box marginLeft={500}>
+          <MovieGrid />
+          <Box justifyContent="center">
             <IconButton aria-label='Search database' icon={<ArrowLeftIcon />} onClick={() => handlePageChange(1)} />
             {
               pages.map((index) =>
@@ -86,10 +76,10 @@ function Home({ filters, nbPages }: any) {
   )
 }
 
-const mapStateToProps = ({ gamesState }: any) => {
+const mapStateToProps = ({ moviesState }: any) => {
   return {
-    filters: gamesState.filters,
-    nbPages: gamesState.nbPages
+    filters: moviesState.filters,
+    nbPages: moviesState.nbPages
   };
 };
 

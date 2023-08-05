@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchPlatformsRequest } from "../store/platforms/actions";
 import { selectPlatformFilter } from "../store/platforms/actions";
-import { fetchGamesRequest, updateGamesFilters } from "../store/games/actions";
+import { fetchGamesRequest, updateGamesFilters } from "../store/movies/actions";
 import { IPlatform } from "../entities/Platform";
 import { connect } from 'react-redux';
 
@@ -41,10 +41,10 @@ const PlatformSelector = ({ platforms, filters }: any) => {
     </Menu>
   )
 }
-const mapStateToProps = ({ platformsState, gamesState }: any) => {
+const mapStateToProps = ({ platformsState, moviesState }: any) => {
   return {
     platforms: platformsState.platforms,
-    filters: gamesState.filters
+    filters: moviesState.filters
   };
 };
 

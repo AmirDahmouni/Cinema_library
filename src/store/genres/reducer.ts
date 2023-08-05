@@ -14,7 +14,7 @@ const initialState: GenresState = {
   error: null,
 };
 
-export default (state = initialState, action: GenresActions) => {
+export default function reducer(state = initialState, action: GenresActions) {
   switch (action.type) {
     case FETCH_GENRES_REQUEST:
       return {
