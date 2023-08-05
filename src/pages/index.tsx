@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Layout from '@/components/Layout'
+import NavBar from '../components/NavBar'
 import { Grid, GridItem, HStack, Show, Box, IconButton, Button } from '@chakra-ui/react'
 import GameGrid from "../components/GameGrid"
 import GenreList from "../components/GenreList"
@@ -37,7 +37,7 @@ function Home({ filters, nbPages }: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout />
+      <NavBar />
 
       <Grid templateAreas={{
         base: `"nav" "main"`,

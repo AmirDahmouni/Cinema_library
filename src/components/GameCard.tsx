@@ -13,7 +13,7 @@ interface Props {
 const GameCard = ({ game, key }: Props) => {
   return (
     <Card borderRadius={10} overflow='hidden'>
-      <Image src={getCroppedImageUrl(game.background_image)} alt="game" />
+      <Image src={getCroppedImageUrl(game.background_image).toString()} alt="game" />
       <CardBody>
         <HStack justifyContent="space-between" marginBottom={3}>
           <PlatformIconList platforms={game.parent_platforms.map(p => p.platform)} />
@@ -21,7 +21,8 @@ const GameCard = ({ game, key }: Props) => {
         </HStack>
         <Heading fontSize="2xl">
           <Link href={game.slug}>{game.name}</Link>
-          <Emoji rating={game.rating_top}></Emoji></Heading>
+          <Emoji rating={game.rating_top}></Emoji>
+        </Heading>
       </CardBody>
     </Card>
   )
