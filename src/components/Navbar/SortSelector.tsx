@@ -1,7 +1,7 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { useDispatch, connect } from "react-redux";
 import { BsChevronDown } from 'react-icons/bs'
-import { fetchMoviesRequest, updateMoviesFilters } from '../store/movies/actions';
+import { fetchMoviesRequest, updateMoviesFilters } from '../../store/movies/actions';
 import { useState } from 'react';
 
 const SortSelector = ({ filters }: any) => {
@@ -16,7 +16,6 @@ const SortSelector = ({ filters }: any) => {
     { value: "revenue.desc", label: "revenue" },
     { value: "vote_average.desc", label: "Average rating" }
   ]
-
 
   const onSelectOrder = (filterValue: string) => {
     setSortOrder(filterValue)

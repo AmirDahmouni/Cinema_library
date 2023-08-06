@@ -16,10 +16,9 @@ const initialState: MoviesState = {
   movies: [],
   filters: [
     { key: "genreId", value: null },
-    { key: "platfotmId", value: null },
+    { key: "language", value: null },
     { key: "sortOrder", value: null },
     { key: "searchText", value: null },
-    { key: "pageParam", value: null },
     { key: "pageParam", value: 1 },
   ],
   selectedMovie: null,
@@ -79,7 +78,7 @@ export default function reducer(state = initialState, action: MoviesActions) {
           updatedFilters.splice(indexFilter, 1)
         updatedFilters.push({
           key: action.filter,
-          value: action.value.toString()
+          value: action.value?.toString() || null
         })
         return {
           ...state,

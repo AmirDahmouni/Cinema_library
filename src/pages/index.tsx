@@ -3,11 +3,8 @@ import { Grid, GridItem, HStack, Show, Box, IconButton, Button } from '@chakra-u
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons"
 import { useCallback, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
-import NavBar from '../components/NavBar'
+import NavBar from '../components/Navbar/NavBar'
 import MovieGrid from "../components/MovieGrid"
-import MovieHeading from '../components/MovieHeading'
-import GenreSelector from '@/components/genreSelector'
-import SortSelector from '../components/SortSelector'
 import { updateMoviesFilters, fetchMoviesRequest } from '../store/movies/actions';
 
 function Home({ filters, nbPages }: any) {
@@ -39,21 +36,11 @@ function Home({ filters, nbPages }: any) {
       <NavBar />
 
       <Grid templateAreas={{
-        base: `"nav" "main" "pagination"`,
-        lg: `"nav nav" "aside main"`
-      }}
-
-      >
-        <GridItem area="main" >
-          <Box paddingLeft={2}>
-            <MovieHeading />
-            <HStack spacing={5} paddingLeft={2} >
-              <GenreSelector />
-              <SortSelector />
-            </HStack>
-          </Box>
+        base: `"nav" "main" pagination`,
+      }}>
+        <GridItem area="main" colSpan={1} >
           <MovieGrid />
-          <Box justifyContent="center">
+          <Box>
             <IconButton aria-label='Search database' icon={<ArrowLeftIcon />} onClick={() => handlePageChange(1)} />
             {
               pages.map((index) =>
@@ -70,7 +57,6 @@ function Home({ filters, nbPages }: any) {
             <IconButton marginLeft={2} aria-label='Search database' icon={<ArrowRightIcon />} onClick={() => handlePageChange(nbPages)} />
           </Box>
         </GridItem>
-
       </Grid >
     </>
   )

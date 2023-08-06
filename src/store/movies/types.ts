@@ -62,7 +62,7 @@ export interface FetchMoviesRequest {
 export interface UpdateMovieFilters {
   type: typeof UPDATE_MOVIES_FILTERS;
   filter: string;
-  value: Number | string;
+  value: Number | string | null;
 }
 
 export type FetchMoviesSuccess = {

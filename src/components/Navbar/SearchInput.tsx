@@ -9,16 +9,17 @@ const SearchInput = ({ onSearch }: Props) => {
 
   const ref = useRef<HTMLInputElement>(null)
   return (
-    <form style={{ width: "100%" }} onSubmit={(event) => {
+    <form style={{ width: "50%" }} onSubmit={(event) => {
       event.preventDefault();
       if (ref.current) onSearch(ref.current.value)
     }}>
       <InputGroup>
-        <InputLeftElement children={<BsSearch />} />
+        <InputLeftElement >
+          <BsSearch />
+        </InputLeftElement>
         <Input borderRadius={20} placeholder='Search movies...' variant="filled" ref={ref} />
       </InputGroup>
     </form >
-
   )
 }
 

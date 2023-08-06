@@ -1,21 +1,20 @@
 import { Heading } from "@chakra-ui/react";
 import { connect } from "react-redux";
 
-const MovieHeading = ({ genre, filters }: any) => {
+const MovieHeading = ({ genre, language }: any) => {
 
-  const sortBy = filters.find((filter: any) => filter.key == "sortBy")
-  if (sortBy || genre)
+  if (language || genre)
     return (
       <Heading as='h1' marginY={5} >
-        {`${sortBy || ''} ${genre || ''} Movies`}
+        {`${language || ''}, ${genre || ''} Movies`}
       </Heading>
     )
 }
 
-const mapStateToProps = ({ genresState, moviesState }: any) => {
+const mapStateToProps = ({ genresState, languagesState }: any) => {
   return {
     genre: genresState.selectedGenre,
-    filters: moviesState.filters
+    language: languagesState.selectedLanguage,
   };
 };
 

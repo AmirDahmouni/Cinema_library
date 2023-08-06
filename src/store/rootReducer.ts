@@ -1,22 +1,21 @@
 import { combineReducers } from "redux";
 
 import moviesReducer from "./movies/reducer";
-import platformReducer from "./platforms/reducer"
+import languagesReducer from "./languages/reducer"
 import genresReducer from "./genres/reducer"
-import trailerReducer from "./trailers/reducer"
+
 
 const rootReducer = combineReducers({
   genresState: genresReducer,
   moviesState: moviesReducer,
-  platformsState: platformReducer,
-  trailerState: trailerReducer
+  languagesState: languagesReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
 
 export type MoviesState = ReturnType<typeof moviesReducer>;
-export type PlatformsState = ReturnType<typeof platformReducer>;
+export type LanguagesState = ReturnType<typeof languagesReducer>;
 export type GenresState = ReturnType<typeof genresReducer>;
-export type TrailerState = ReturnType<typeof trailerReducer>;
+
 
 export default rootReducer;

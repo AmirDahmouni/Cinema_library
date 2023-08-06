@@ -1,11 +1,12 @@
 import IMovie from '../../entities/Movie'
 import { Card, Image, CardBody, Heading, HStack, Box, Icon, Badge } from '@chakra-ui/react'
+import ReactCountryFlag from "react-country-flag"
 import { MdNoAdultContent } from 'react-icons/md'
 import getCroppedImageUrl from '../../services/image-url'
 import Score from './Score'
 import ExpandableText from './ExpandableText'
 import RatingReviews from './RatingReviews'
-import Views from '../Views'
+import Views from './Views'
 import GenresMovie from './GenresMovie'
 
 interface Props {
@@ -16,11 +17,16 @@ interface Props {
 const MovieCard = ({ movie, key }: Props) => {
   return (
     <Card borderRadius={10} overflow='hidden'>
-      <Image src={getCroppedImageUrl(movie.backdrop_path).toString()} alt="movie" />
+      <Image src={getCroppedImageUrl(movie.backdrop_path || movie.poster_path).toString()}
+        width='auto'
+        height={220}
+        alt={`cover ${movie.original_title}`}
+      />
       <CardBody>
         <HStack justifyContent="space-between">
           <Score score={movie.vote_average}></Score>
           {movie.adult && <Icon as={MdNoAdultContent} fontSize={30} />}
+          <ReactCountryFlag countryCode={movie.original_language} svg style={{ fontSize: '1.5em' }} />
         </HStack>
         <HStack justifyContent="space-between" marginBottom={2} marginTop={4}>
           <Badge margin={1} padding={1} borderRadius={5} textAlign="right">

@@ -3,11 +3,9 @@ import { BsChevronDown } from "react-icons/bs"
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchGenresRequest, selectGenreFilter } from "@/store/genres/actions";
-
-import { fetchMoviesRequest, updateMoviesFilters } from "../store/movies/actions";
+import { fetchMoviesRequest, updateMoviesFilters } from "../../store/movies/actions";
 import { connect } from 'react-redux';
 import IGenre from "@/entities/Genre";
-
 
 const GenreSelector = ({ genres, filters }: any) => {
 
@@ -23,7 +21,6 @@ const GenreSelector = ({ genres, filters }: any) => {
     dispatch(selectGenreFilter(genre.name))
     dispatch(updateMoviesFilters("genreId", genre.id))
     dispatch(fetchMoviesRequest(filters))
-
   }
 
   const currentGenre = genres?.find((genre: IGenre) => genre.name === selectedGenre)

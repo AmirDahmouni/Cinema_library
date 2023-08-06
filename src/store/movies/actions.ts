@@ -12,7 +12,7 @@ import {
 } from "./types";
 
 
-export const fetchMoviesRequest = (payload: { key: string, value: string }[]): MoviesActions => ({
+export const fetchMoviesRequest = (payload: { key: string, value: string | null }[]): MoviesActions => ({
   type: FETCH_MOVIES_REQUEST,
   payload
 });
@@ -42,7 +42,7 @@ export const fetchMovieFailure = (payload: FetchMovieFailurePayload): MoviesActi
   payload,
 });
 
-export const updateMoviesFilters = (filter: string, value: Number | string): MoviesActions => ({
+export const updateMoviesFilters = (filter: string, value: Number | string | null): MoviesActions => ({
   type: UPDATE_MOVIES_FILTERS,
   filter,
   value
