@@ -27,7 +27,7 @@ function Home({ nbPages }: any) {
           <MovieHeading />
           <MovieGrid />
         </GridItem>
-        <GridItem >
+        <GridItem style={{ textAlignLast: "center" }}>
           {nbPages > 1 && <Pagination />}
         </GridItem>
       </Grid >
