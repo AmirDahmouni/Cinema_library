@@ -37,7 +37,7 @@ function LoginPage(props: any) {
         <Heading textAlign="center" mb="6">
           Login
         </Heading>
-        <Box textAlign="-webkit-center">
+        <Box>
           <Image src={logo.src} width={60} height={60} alt={logo.blurDataURL} />
         </Box>
 

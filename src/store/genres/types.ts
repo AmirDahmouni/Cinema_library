@@ -28,7 +28,7 @@ export interface FetchGenresRequest {
 
 export interface SelectGenreFilter {
   type: typeof SELECT_GENRE_FILTER;
-  genre: string;
+  genre: string | null;
 }
 
 export type FetchGenresSuccess = {

@@ -5,8 +5,7 @@ import {
   UPDATE_MOVIES_FILTERS,
   FETCH_MOVIE_REQUEST,
   FETCH_MOVIE_SUCCESS,
-  FETCH_MOVIE_FAILURE,
-  FETCH_SCREEN_MOVIE_REQUEST,
+  FETCH_MOVIE_FAILURE
 } from "./actionTypes";
 import IMovie from "../../entities/Movie";
 
@@ -43,20 +42,21 @@ export interface FetchMovieScreensPayload {
 }
 
 export interface FetchMovieRequestPayload {
-  title: string
+  slug: string
 }
+
 
 
 
 export interface FetchMovieRequest {
-  type: typeof FETCH_MOVIES_REQUEST;
-  payload: { key: string, value: string }[]
+  type: typeof FETCH_MOVIE_REQUEST;
+  payload: { slug: string }
 }
 
 
 export interface FetchMoviesRequest {
-  type: typeof FETCH_MOVIE_REQUEST;
-  payload: { slug: string }
+  type: typeof FETCH_MOVIES_REQUEST;
+  payload: { key: string, value: string | number | null }[]
 }
 
 export interface UpdateMovieFilters {

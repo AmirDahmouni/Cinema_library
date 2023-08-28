@@ -17,5 +17,6 @@ export default interface IMovie {
   vote_average: number;
   vote_count: number;
   overview: string;
+  results: any[]
 
 }

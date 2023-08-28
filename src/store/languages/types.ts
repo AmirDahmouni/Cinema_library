@@ -28,7 +28,7 @@ export interface FetchLanguagesRequest {
 
 export interface SelectLanguageFilter {
   type: typeof SELECT_LANGUAGE_FILTER;
-  language: String;
+  language: String | null;
 }
 
 export type FetchLanguagesSuccess = {

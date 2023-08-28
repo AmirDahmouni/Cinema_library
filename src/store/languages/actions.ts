@@ -23,7 +23,7 @@ export const fetchLanguagesFailure = (payload: FetchLanguagesFailurePayload): La
   payload,
 });
 
-export const selectLanguageFilter = (language: String): LanguagesActions => ({
+export const selectLanguageFilter = (language: String | null): LanguagesActions => ({
   type: SELECT_LANGUAGE_FILTER,
   language,
 })

@@ -12,7 +12,7 @@ import {
 } from "./types";
 
 
-export const fetchMoviesRequest = (payload: { key: string, value: string | null }[]): MoviesActions => ({
+export const fetchMoviesRequest = (payload: { key: string, value: string | number | null }[]): MoviesActions => ({
   type: FETCH_MOVIES_REQUEST,
   payload
 });

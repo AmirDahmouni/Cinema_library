@@ -1,29 +1,12 @@
 import Head from 'next/head'
-import { Grid, GridItem, HStack, Show, Box, IconButton, Button } from '@chakra-ui/react'
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons"
-import { useCallback, useState } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { Grid, GridItem } from '@chakra-ui/react';
+import { connect } from 'react-redux';
 import NavBar from '../components/Navbar/NavBar'
 import MovieGrid from "../components/MovieGrid"
-import { updateMoviesFilters, fetchMoviesRequest } from '../store/movies/actions';
+import MovieHeading from '@/components/MovieHeading';
+import Pagination from '@/components/Pagination';
 
-function Home({ filters, nbPages }: any) {
-
-  const [pages, setPages] = useState<number[]>([1, 2, 3])
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const dispatch = useDispatch()
-
-  const handlePageChange = useCallback((page: number) => {
-    dispatch(updateMoviesFilters("pageParam", page))
-    dispatch(fetchMoviesRequest(filters))
-    setCurrentPage(page)
-    let pages = [1, 2, 3]
-    if (page == nbPages)
-      pages = [nbPages - 2, nbPages - 1, nbPages]
-    if (page !== 1)
-      pages = [page - 1, page, page + 1]
-    setPages(pages)
-  }, [])
+function Home({ nbPages }: any) {
 
   return (
     <>
@@ -35,27 +18,17 @@ function Home({ filters, nbPages }: any) {
       </Head>
       <NavBar />
 
-      <Grid templateAreas={{
-        base: `"nav" "main" pagination`,
-      }}>
-        <GridItem area="main" colSpan={1} >
+      <Grid
+        height={100}
+        templateRows="auto 1fr 2fr" // Define three rows: navbar, main grid, pagination
+        templateColumns="1fr"
+        gap={1} >
+        <GridItem >
+          <MovieHeading />
           <MovieGrid />
-          <Box>
-            <IconButton aria-label='Search database' icon={<ArrowLeftIcon />} onClick={() => handlePageChange(1)} />
-            {
-              pages.map((index) =>
-                <Button
-                  bg={currentPage == index ? 'blue.700' : 'whiteAlpha.100'}
-                  marginLeft={2}
-                  key={index}
-                  onClick={() => handlePageChange(index)}
-                >
-                  {index}
-                </Button>
-              )
-            }
-            <IconButton marginLeft={2} aria-label='Search database' icon={<ArrowRightIcon />} onClick={() => handlePageChange(nbPages)} />
-          </Box>
+        </GridItem>
+        <GridItem >
+          {nbPages > 1 && <Pagination />}
         </GridItem>
       </Grid >
     </>

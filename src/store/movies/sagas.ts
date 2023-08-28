@@ -14,7 +14,6 @@ type filters = {
   pageParam: Number | null,
 }
 
-
 const getMovies = (filters: filters) => axios.get<IMovie[]>(
   `${process.env.NEXT_PUBLIC_URL_API}/discover/movie?`
   ,
@@ -33,15 +32,19 @@ const getMovies = (filters: filters) => axios.get<IMovie[]>(
 );
 
 
-
-function* fetchMoviesSaga(action: FetchMoviesRequest) {
-  const filters = action.payload?.reduce((acc: any, { key, value }) => {
-    acc[key] = value;
-    return acc;
-  }, {});
+function* fetchMoviesSaga(request: FetchMoviesRequest | undefined) {
   try {
-    const response: AxiosResponse<any[]> = yield call(getMovies, filters);
-    yield put(fetchMoviesSuccess({ movies: response.data.results, nbPages: Math.ceil(response.data.total_pages / 20) }));
+    const filters = request?.payload?.reduce((acc: any, { key, value }) => {
+      acc[key] = value;
+      return acc;
+    }, {});
+    const response: AxiosResponse<{ results: any, total_pages: number }> = yield call(getMovies, filters);
+    yield put(
+      fetchMoviesSuccess({
+        movies: response.data.results,
+        nbPages: Math.ceil(response.data.total_pages / 20)
+      })
+    );
   } catch (e) {
     const error = e as AxiosError;
     yield put(fetchMoviesFailure({ error: error.message }));

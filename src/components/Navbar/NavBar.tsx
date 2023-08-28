@@ -9,6 +9,8 @@ import { useCallback } from "react";
 import GenreSelector from "./genreSelector";
 import SortSelector from "./SortSelector";
 import LanguagesSelector from "./LanguagesSelector";
+import { selectGenreFilter } from "../../store/genres/actions"
+import { selectLanguageFilter } from "../../store/languages/actions"
 
 const NavBar = ({ filters }: any) => {
 
@@ -25,6 +27,8 @@ const NavBar = ({ filters }: any) => {
     dispatch(updateMoviesFilters("language", null))
     dispatch(updateMoviesFilters("sortOrder", null))
     dispatch(updateMoviesFilters("pageParam", null))
+    dispatch(selectGenreFilter(null))
+    dispatch(selectLanguageFilter(null))
     dispatch(fetchMoviesRequest(filters))
   }, [])
 

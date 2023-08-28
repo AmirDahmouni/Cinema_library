@@ -20,7 +20,7 @@ export const fetchGenresFailure = (payload: FetchGenresFailurePayload): GenresAc
   payload,
 });
 
-export const selectGenreFilter = (genre: string): GenresActions => ({
+export const selectGenreFilter = (genre: string | null): GenresActions => ({
   type: SELECT_GENRE_FILTER,
   genre,
 })

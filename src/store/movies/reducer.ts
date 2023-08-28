@@ -38,7 +38,7 @@ export default function reducer(state = initialState, action: MoviesActions) {
       return {
         ...state,
         pending: true,
-        slug: action.payload.slug,
+        slug: action.payload,
       };
     case FETCH_MOVIES_SUCCESS:
       return {
