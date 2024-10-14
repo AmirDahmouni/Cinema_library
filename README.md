@@ -1,4 +1,5 @@
 # 🎥 Movie Explorer
+![Game Library Screenshot 1](public/screen.png)
 
 The **[Movie Explorer](https://cinema-library.vercel.app/)** app, built with **Chakra UI** for sleek and responsive user interfaces, enables users to explore and showcase movies sourced from the **TMDb API**.
 
